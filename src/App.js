@@ -14,7 +14,7 @@ function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-   auth.onAuthStateChanged((userAuth) => {
+  const unsubscribe = auth.onAuthStateChanged((userAuth) => {
     if (userAuth) {
       dispatch(
         login({
@@ -28,7 +28,10 @@ function App() {
       dispatch(logout());
     }
   });
-}, []); // ✅ Only runs once on mount
+
+  return () => unsubscribe(); // clean up listener on unmount
+}, [dispatch]); // ✅ include dispatch here
+
 
 
 

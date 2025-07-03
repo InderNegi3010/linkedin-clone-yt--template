@@ -3,13 +3,27 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  min-height: 100vh;
 }
 
+/* Main layout body */
 .app__body {
   display: flex;
-  width: 100%;        
+  flex-direction: row; /* default for desktop */
+  width: 100%;
   max-width: 1200px;
-  margin-top:35px ; 
-  margin-left: 20px;
-  margin-right: 20px;
+  margin-top: 35px;
+  padding: 0 20px;
+  gap: 20px; /* spacing between Sidebar, Feed, Widgets */
+  box-sizing: border-box;
 }
+
+/* Responsive layout for mobile */
+@media (max-width: 768px) {
+  .app__body {
+    flex-direction: column; /* stack elements vertically */
+    padding: 0 10px;
+    gap: 15px;
+  }
+}
+

@@ -1,43 +1,94 @@
-.feed{
-    flex: 0.6;
-    margin: 0 20px;
+.feed {
+  flex: 0.6;
+  margin: 0 20px;
 }
 
-.feed__inputContainer{
-    background-color: white;
-    padding: 10px;
-    padding-bottom: 20px;
-    border-radius: 10px;
-    margin-bottom: 20px;
+/* Input Container */
+.feed__inputContainer {
+  background-color: white;
+  padding: 10px;
+  padding-bottom: 20px;
+  border-radius: 10px;
+  margin-bottom: 20px;
 }
 
-.feed__input{
-    border: 1px solid lightgray;
-    border-radius: 30px;
-    padding: 10px;
-    display: flex;
-    color: gray;
-    padding-left: 15px;
+/* Input Bar */
+.feed__input {
+  border: 1px solid lightgray;
+  border-radius: 30px;
+  padding: 10px 15px;
+  display: flex;
+  color: gray;
+  align-items: center;
 }
 
+/* Input form layout */
 .feed__input > form {
-    display: flex;
-    width: 100%;
+  display: flex;
+  width: 100%;
+  align-items: center;
 }
 
-.feed__input > form > input{
-    border: none;
-    flex: 1;
-    margin-left: 10px;
-    outline-width: 0;
-    font-weight: 600;
+.feed__input > form > input {
+  border: none;
+  flex: 1;
+  margin-left: 10px;
+  outline-width: 0;
+  font-weight: 600;
+  font-size: 14px;
 }
 
 .feed__input > form > button {
-    display: none;
+  display: none;
 }
 
-.feed__inputOptions{
-    display: flex;
-    justify-content: space-evenly;
+/* Input Options (Photo | Video | Event...) */
+.feed__inputOptions {
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  margin-top: 10px;
+  gap: 10px;
+}
+
+/* ✅ Responsive Adjustments */
+@media (max-width: 768px) {
+  .feed {
+    flex: 1 1 100%;
+    margin: 0 10px;
+  }
+
+  .feed__inputContainer {
+    padding: 8px;
+  }
+
+  .feed__input {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 8px 10px;
+  }
+
+  .feed__input > form {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .feed__input > form > input {
+    width: 100%;
+    font-size: 13px;
+  }
+
+  .feed__inputOptions {
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 8px;
+    margin-top: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .feed__inputOptions {
+    flex-direction: column;
+    align-items: stretch;
+  }
 }
