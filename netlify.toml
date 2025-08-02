@@ -1,9 +1,7 @@
-[build.environment]
-  NPM_FLAGS = "--production=false"
-
 [build]
   command = "npm install && npm run build"
   publish = "build"
-  
-[[plugins]]
-  package = "@netlify/plugin-nextjs"
+
+# Remove or comment out this section:
+#[[plugins]]
+#  package = "@netlify/plugin-nextjs"
