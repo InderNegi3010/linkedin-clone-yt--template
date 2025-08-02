@@ -3,13 +3,15 @@ import { Avatar } from "@mui/material";
 import { useSelector } from "react-redux";
 import { selectUser } from "./features/userSlice.jsx";
 
-function HeaderOption({ avatar, Icon, title, onClick }) {
+function HeaderOption({ avatar, Icon, title, onClick, isActive }) {
   const user = useSelector(selectUser);
 
   return (
     <div
       onClick={onClick}
-      className="flex flex-col items-center justify-center cursor-pointer text-gray-500 hover:text-black transition-colors duration-300 min-w-0"
+      className={`flex flex-col items-center justify-center cursor-pointer transition-colors duration-300 min-w-0 ${
+        isActive ? 'text-linkedin-blue' : 'text-gray-500 hover:text-black'
+      }`}
     >
       {Icon && <Icon className="object-contain h-6 w-6 lg:h-7 lg:w-7" />}
       {avatar && (

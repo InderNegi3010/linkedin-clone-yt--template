@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import SearchIcon from "@mui/icons-material/Search";
 import HeaderOption from "./HeaderOption.jsx";
+import ProfileDropdown from "./components/ProfileDropdown.jsx";
 import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
 import HomeIcon from "@mui/icons-material/Home";
 import WorkIcon from "@mui/icons-material/Work";
@@ -12,10 +13,16 @@ import { auth } from "./firebase";
 
 function Header() {
   const dispatch = useDispatch();
+  const [showProfileDropdown, setShowProfileDropdown] = useState(false);
 
   const logoutOfApp = () => {
     dispatch(logout());
     auth.signOut();
+    setShowProfileDropdown(false);
+  };
+
+  const toggleProfileDropdown = () => {
+    setShowProfileDropdown(!showProfileDropdown);
   };
 
   return (
@@ -47,7 +54,18 @@ function Header() {
           <HeaderOption Icon={WorkIcon} title="Jobs" />
           <HeaderOption Icon={TextsmsIcon} title="Messaging" />
           <HeaderOption Icon={NotificationsIcon} title="Notifications" />
-          <HeaderOption avatar={true} title="Me" onClick={logoutOfApp} />
+          <div className="relative">
+            <HeaderOption 
+              avatar={true} 
+              title="Me" 
+              onClick={toggleProfileDropdown}
+              isActive={showProfileDropdown}
+            />
+            <ProfileDropdown 
+              isOpen={showProfileDropdown} 
+              onClose={() => setShowProfileDropdown(false)} 
+            />
+          </div>
         </div>
       </div>
 
@@ -76,7 +94,18 @@ function Header() {
           <HeaderOption Icon={WorkIcon} title="Jobs" />
           <HeaderOption Icon={TextsmsIcon} title="Messaging" />
           <HeaderOption Icon={NotificationsIcon} title="Notifications" />
-          <HeaderOption avatar={true} title="Me" onClick={logoutOfApp} />
+          <div className="relative">
+            <HeaderOption 
+              avatar={true} 
+              title="Me" 
+              onClick={toggleProfileDropdown}
+              isActive={showProfileDropdown}
+            />
+            <ProfileDropdown 
+              isOpen={showProfileDropdown} 
+              onClose={() => setShowProfileDropdown(false)} 
+            />
+          </div>
         </div>
       </div>
     </div>
