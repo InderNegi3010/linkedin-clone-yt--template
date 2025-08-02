@@ -86,7 +86,7 @@ function ProfileDropdown({ isOpen, onClose }) {
         {/* Posts Section */}
         <div className="p-4">
           <h4 className="font-semibold text-sm mb-3 text-gray-700">
-            Your Posts ({userPosts.length})
+            Your Recent Posts ({userPosts.length})
           </h4>
           
           <div className="max-h-64 overflow-y-auto space-y-3">
@@ -95,8 +95,17 @@ function ProfileDropdown({ isOpen, onClose }) {
                 <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-linkedin-blue"></div>
               </div>
             ) : userPosts.length > 0 ? (
-              userPosts.map(({ id, data: { name, description, message, photoUrl } }) => (
-                <div key={id} className="border border-gray-100 rounded-lg p-3 bg-gray-50">
+              userPosts.map(({ id, data: { name, description, message, photoUrl, timestamp } }, index) => (
+                <div key={id} className={`border rounded-lg p-3 relative ${
+                  index === 0 ? 'border-linkedin-blue bg-blue-50' : 'border-gray-100 bg-gray-50'
+                }`}>
+                  {index === 0 && (
+                    <div className="absolute top-2 right-2">
+                      <span className="bg-linkedin-blue text-white text-xs px-2 py-1 rounded-full">
+                        Latest
+                      </span>
+                    </div>
+                  )}
                   <div className="flex items-start mb-2">
                     <Avatar src={photoUrl} className="mr-2 w-6 h-6">
                       {name?.[0]}
@@ -104,6 +113,11 @@ function ProfileDropdown({ isOpen, onClose }) {
                     <div className="flex-1 min-w-0">
                       <h5 className="font-medium text-xs truncate">{name}</h5>
                       <p className="text-xs text-gray-500 truncate">{description}</p>
+                      {timestamp && (
+                        <p className="text-xs text-gray-400 mt-1">
+                          {new Date(timestamp.seconds * 1000).toLocaleDateString()}
+                        </p>
+                      )}
                     </div>
                   </div>
                   <p className="text-xs text-gray-700 line-clamp-3">{message}</p>
@@ -116,6 +130,14 @@ function ProfileDropdown({ isOpen, onClose }) {
               </div>
             )}
           </div>
+          
+          {userPosts.length > 0 && (
+            <div className="mt-3 pt-3 border-t border-gray-100">
+              <p className="text-xs text-gray-500 text-center">
+                Showing your {userPosts.length > 5 ? 'latest 5' : 'all'} posts
+              </p>
+            </div>
+          )}
         </div>
       </motion.div>
     </AnimatePresence>
