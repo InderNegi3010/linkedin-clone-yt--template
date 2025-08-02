@@ -19,7 +19,7 @@ function ProfileDropdown({ isOpen, onClose }) {
 
     const q = query(
       collection(db, "posts"),
-      where("description", "==", user.email),
+      where("email", "==", user.email),
       orderBy("timestamp", "desc")
     );
 
